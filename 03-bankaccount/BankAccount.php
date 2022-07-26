@@ -7,6 +7,7 @@ class BankAccount
     private $amount;
     private $owners = [];
     private static $increment = 1;
+    private $history = [];
 
     public function __construct($identifier, $name, $amount = 0)
     {
@@ -28,6 +29,8 @@ class BankAccount
         }
 
         $this->amount += $amount;
+
+        $this->addHistory('deposit', $amount);
     }
 
     public function withdrawMoney($amount)
@@ -37,6 +40,40 @@ class BankAccount
         }
 
         $this->amount -= $amount;
+
+        $this->addHistory('withdraw', $amount);
+    }
+
+    /**
+     * Permet de faire un virement.
+     *
+     * @param  BankAccount  $receiver
+     * @param  int  $amount
+     * @return void
+     */
+    public function wireTo($receiver, $amount)
+    {
+        $this->withdrawMoney($amount);
+        $receiver->depositMoney($amount);
+
+        $this->addHistory('deposit to '.$receiver->name, $amount);
+        $receiver->addHistory('deposit from '.$this->name, $amount);
+    }
+
+    private function addHistory($name, $amount)
+    {
+        $this->history[] = new Transaction($name, $amount);
+
+        return $this;
+    }
+
+    public function showHistory()
+    {
+        echo '<ul>';
+        foreach ($this->history as $transaction) {
+            echo '<li>'.$transaction->name.' le '.$transaction->date.' de '.$transaction->amount.' €</li>';
+        }
+        echo '</ul>';
     }
 
     public function addOwner(Owner $owner)

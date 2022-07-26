@@ -10,6 +10,7 @@
     <?php
         require 'BankAccount.php';
         require 'Owner.php';
+        require 'Transaction.php';
 
         $bankAccount00 = new BankAccount(123456, 'Fiorella');
         $bankAccount09 = new BankAccount(123456, 'Fiorella');
@@ -48,8 +49,23 @@
         var_dump($bankAccount01->getOwners());
         $matthieu->pay();
         $marina->pay();
+
+        // Faire un virement
+        $bankAccount02 = new BankAccount(123457, 'Test');
+        try {
+            $bankAccount01->wireTo($bankAccount02, 1000);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     ?>
 
     <p>Montant du compte: <?= $bankAccount01->getBalance(); // Renvoie 0 ?></p>
+    <p>Montant du compte: <?= $bankAccount02->getBalance(); // Renvoie 0 ?></p>
+
+    <h2>Historique du compte 1</h2>
+    <?= $bankAccount01->showHistory(); ?>
+
+    <h2>Historique du compte 2</h2>
+    <?= $bankAccount02->showHistory(); ?>
 </body>
 </html>
