@@ -9,6 +9,7 @@
 <body>
     <?php
         require 'BankAccount.php';
+        require 'Owner.php';
 
         $bankAccount00 = new BankAccount(123456, 'Fiorella');
         $bankAccount09 = new BankAccount(123456, 'Fiorella');
@@ -24,11 +25,29 @@
     <?php
         // On renvoie une erreur si le montant du compte tombe en dessous de 0
         try {
-            $bankAccount01->depositMoney(-2000);
+            $bankAccount01->depositMoney(20000);
             $bankAccount01->withdrawMoney(1000);
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    ?>
+
+    <p>Montant du compte: <?= $bankAccount01->getBalance(); // Renvoie 0 ?></p>
+
+    <?php
+        $matthieu = new Owner('Matthieu');
+        $marina = new Owner('Marina', 3000, $bankAccount01);
+        // On peut lier les objets entre eux
+        // Les objets sont mutables
+        $marina->bankAccount->depositMoney(30000);
+        // var_dump($marina->bankAccount);
+
+        $bankAccount01->addOwner($matthieu);
+
+        // Liste les propriétaires du compte
+        var_dump($bankAccount01->getOwners());
+        $matthieu->pay();
+        $marina->pay();
     ?>
 
     <p>Montant du compte: <?= $bankAccount01->getBalance(); // Renvoie 0 ?></p>

@@ -5,6 +5,7 @@ class BankAccount
     public $identifier;
     public $name;
     private $amount;
+    private $owners = [];
     private static $increment = 1;
 
     public function __construct($identifier, $name, $amount = 0)
@@ -36,5 +37,18 @@ class BankAccount
         }
 
         $this->amount -= $amount;
+    }
+
+    public function addOwner(Owner $owner)
+    {
+        // L'objet $this devient le compte du owner
+        $owner->bankAccount = $this;
+        // L'owner $owner est ajouté dans une propriété de $this
+        $this->owners[] = $owner;
+    }
+
+    public function getOwners()
+    {
+        return $this->owners;
     }
 }
