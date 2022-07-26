@@ -1,0 +1,13 @@
+{
+    "name": "matthieu/05-composer",
+    "description": "Découverte de Composer",
+    "authors": [
+        {
+            "name": "Matthieu Mota",
+            "email": "matthieumota@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/var-dumper": "^6.0"
+    }
+}
