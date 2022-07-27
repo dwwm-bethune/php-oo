@@ -13,7 +13,7 @@ spl_autoload_register(function ($class) {
 use M2i\Animal;
 use M2i\Cat;
 use M2i\Dog;
-use M2i\Kennel;
+use M2i\Building\Kennel;
 
 $cat = new Cat('Bianca', 'blanc');
 dump($cat);

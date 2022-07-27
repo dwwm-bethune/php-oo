@@ -1,6 +1,8 @@
 <?php
 
-namespace M2i;
+namespace M2i\Building;
+
+use M2i\Animal;
 
 class Kennel
 {
