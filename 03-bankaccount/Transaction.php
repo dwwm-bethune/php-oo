@@ -10,6 +10,6 @@ class Transaction
     {
         $this->name = $name;
         $this->amount = $amount;
-        $this->date = date('Y-m-d H:i:s');
+        $this->date = date('Y-m-d H:i:s', strtotime('2022-07-26'));
     }
 }

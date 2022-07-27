@@ -8,9 +8,8 @@
 </head>
 <body>
     <?php
-        require 'BankAccount.php';
-        require 'Owner.php';
-        require 'Transaction.php';
+        require __DIR__.'/../05-composer/vendor/autoload.php';
+        spl_autoload_register();
 
         $bankAccount00 = new BankAccount(123456, 'Fiorella');
         $bankAccount09 = new BankAccount(123456, 'Fiorella');
@@ -67,5 +66,14 @@
 
     <h2>Historique du compte 2</h2>
     <?= $bankAccount02->showHistory(); ?>
+
+    <h2>Livret héritage</h2>
+    <?php
+        $savingAccount = new SavingAccount(1234, 'Fiorella', 5000);
+        for ($i = 0; $i < 20; $i++) {
+            $savingAccount->applyInterest(2);
+        }
+        dump($savingAccount->getBalance());
+    ?>
 </body>
 </html>
