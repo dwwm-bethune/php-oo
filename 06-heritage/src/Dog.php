@@ -1,5 +1,7 @@
 <?php
 
+namespace M2i;
+
 class Dog extends Animal
 {
     // On remplace la propriété loving

@@ -1,5 +1,7 @@
 <?php
 
+namespace M2i;
+
 class Kennel
 {
     public function keep(Animal $animal)

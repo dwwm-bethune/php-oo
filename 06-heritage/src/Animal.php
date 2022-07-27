@@ -1,5 +1,7 @@
 <?php
 
+namespace M2i;
+
 // La classe animal ne peut pas être
 // instanciée directement
 abstract class Animal

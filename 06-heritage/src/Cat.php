@@ -1,5 +1,7 @@
 <?php
 
+namespace M2i;
+
 class Cat extends Animal
 {
     private $fur;
