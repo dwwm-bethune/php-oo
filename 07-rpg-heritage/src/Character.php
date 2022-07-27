@@ -11,7 +11,7 @@ abstract class Character
     // La vie est privée, on ne peut l'enlever que via un setter
     private $life = 100;
     // On peut modifier la force et le mana dans les enfants
-    protected $strenght = 10;
+    protected $strength = 10;
     protected $mana = 10;
     private $items = [];
     private $level = 1;
@@ -25,7 +25,7 @@ abstract class Character
     public function attack(Character $target)
     {
         // Enlève la vie
-        $this->pullLife($target, $this->strenght);
+        $this->pullLife($target, $this->strength);
 
         // Log l'action
         $this->log($target, 'attaque');

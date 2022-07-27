@@ -8,12 +8,12 @@ class Warrior extends Character
     {
         parent::__construct($name);
 
-        $this->strenght *= 2;
+        $this->strength *= 2;
     }
 
     public function attack(Character $target)
     {
-        $this->pullLife($target, $this->strenght * 2);
+        $this->pullLife($target, $this->strength * 2);
 
         $this->log($target, 'attaque');
 
