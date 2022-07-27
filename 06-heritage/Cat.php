@@ -19,4 +19,9 @@ class Cat extends Animal
     {
         return parent::move().' silencieusement';
     }
+
+    public function isAllowedToKennel()
+    {
+        return false;
+    }
 }

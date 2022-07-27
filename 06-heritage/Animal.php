@@ -1,6 +1,8 @@
 <?php
 
-class Animal
+// La classe animal ne peut pas être
+// instanciée directement
+abstract class Animal
 {
     protected $name;
     protected $loving = false;
@@ -14,4 +16,11 @@ class Animal
     {
         return $this->name.' se déplace';
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    abstract public function isAllowedToKennel();
 }

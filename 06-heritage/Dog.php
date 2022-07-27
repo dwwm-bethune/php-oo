@@ -17,4 +17,9 @@ class Dog extends Animal
     {
         return $this->name.' joue à la balle';
     }
+
+    public function isAllowedToKennel()
+    {
+        return true;
+    }
 }
