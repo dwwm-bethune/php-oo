@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require 'src/helpers.php';
 autoload();
@@ -6,6 +7,7 @@ autoload();
 use Game\Character;
 
 $character = null;
+$incarn = null;
 
 if (submit()) {
     $character = new Character(post('name'), post('class'), post('tribe'));
@@ -18,6 +20,21 @@ if (submit()) {
         // On ajoute le personnage dans la BDD
         $character->save();
     }
+}
+
+// On regarde si on a cliqué sur le bouton "Incarn"
+if (isset($_GET['incarn'])) {
+    $_SESSION['incarn'] = $_GET['incarn'];
+}
+
+// On peut se déconnecter
+if (isset($_GET['logout'])) {
+    unset($_SESSION['incarn']);
+}
+
+// On regarde si un personnage est choisi
+if (isset($_SESSION['incarn'])) {
+    $incarn = Character::find($_SESSION['incarn']);
 }
 ?>
 <!DOCTYPE html>
@@ -120,6 +137,14 @@ if (submit()) {
     </div>
 
     <div class="max-w-5xl mx-auto mt-8">
+        <?php if ($incarn) { ?>
+            <div class="flex items-center justify-center mb-8">
+                <img class="w-12 h-12 rounded-full mr-8" src="<?= $incarn->image(); ?>" alt="<?= $incarn->name; ?>">
+                <h2 class="text-center my-4 text-xl mr-6">Salut <?= $incarn->name; ?>, qui veux-tu combattre ?</h2>
+                <a href="index.php?logout">Arrêter</a>
+            </div>
+        <?php } ?>
+
         <div class="flex flex-wrap">
             <?php foreach (Character::all() as $character) { ?>
                 <div class="w-1/2 lg:w-1/3">
@@ -134,6 +159,14 @@ if (submit()) {
                             <li class="py-2">Ta force: <?= $character->strength; ?></li>
                             <li class="py-2">Ton mana: <?= $character->mana; ?></li>
                         </ul>
+
+                        <div class="text-center">
+                            <?php if ($incarn) { ?>
+                                <a class="bg-blue-500 hover:bg-blue-600 duration-300 text-white px-3 py-2 rounded inline-block" href="fight.php?attacker=<?= $incarn->id; ?>&target=<?= $character->id; ?>">Combattre</a>
+                            <?php } else { ?>
+                                <a class="bg-blue-500 hover:bg-blue-600 duration-300 text-white px-3 py-2 rounded inline-block" href="index.php?incarn=<?= $character->id; ?>">Incarner</a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             <?php } ?>

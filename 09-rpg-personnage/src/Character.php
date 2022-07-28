@@ -142,4 +142,16 @@ class Character
 
         return $query->fetchAll(\PDO::FETCH_CLASS, self::class);
     }
+
+    /**
+     * Récupèrer un personnage.
+     */
+    public static function find($id)
+    {
+        $query = self::db()->prepare('SELECT * FROM characters WHERE id = ?');
+        $query->execute([$id]);
+        $query->setFetchMode(\PDO::FETCH_CLASS, self::class);
+
+        return $query->fetch();
+    }
 }
