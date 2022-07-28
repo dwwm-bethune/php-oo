@@ -9,6 +9,10 @@ $character = null;
 
 if (submit()) {
     $character = new Character(post('name'), post('class'), post('tribe'));
+
+    if (post('random')) {
+        $character->randomName();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -22,8 +26,35 @@ if (submit()) {
 </head>
 <body class="font-[Lato]">
     <div class="max-w-3xl mx-auto mt-8">
+        <?php if ($character && !$character->hasErrors()) { ?>
+        <div class="border p-8 rounded-lg mb-8 text-center">
+            <h1 class="text-2xl">Salut <?= $character->name; ?></h1>
+            <p>Tu es un <?= $character->getClass().' '.$character->getTribe(); ?>.</p>
+
+            <img class="my-4 mx-auto rounded-full" src="<?= $character->image(); ?>" alt="<?= $character->name; ?>">
+
+            <ul class="divide-y border mb-4 w-1/2 mx-auto rounded">
+                <li class="py-2">Ta santé: <?= $character->health; ?></li>
+                <li class="py-2">Ta force: <?= $character->strength; ?></li>
+                <li class="py-2">Ton mana: <?= $character->mana; ?></li>
+            </ul>
+
+            <div class="text-center">
+                <a href="index.php" class="bg-blue-500 hover:bg-blue-600 duration-300 text-white px-3 py-2 rounded inline-block">Je veux un autre personnage</a>
+            </div>
+        </div>
+        <?php } ?>
+
         <div class="border p-8 rounded-lg">
             <h1 class="text-center text-2xl mb-6">POO RPG - Créer votre personnage</h1>
+
+            <?php if ($character && $character->hasErrors()) { ?>
+                <ul class="bg-red-300 text-red-900 mb-8 px-6 py-5 rounded-lg">
+                    <?php foreach ($character->errors() as $error) { ?>
+                        <li><?= $error; ?></li>
+                    <?php } ?>
+                </ul>
+            <?php } ?>
 
             <form action="" method="post" class="space-y-6">
                 <div>
