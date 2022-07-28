@@ -3,6 +3,13 @@
 require 'src/helpers.php';
 autoload();
 
+use Game\Character;
+
+$character = null;
+
+if (submit()) {
+    $character = new Character(post('name'), post('class'), post('tribe'));
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
