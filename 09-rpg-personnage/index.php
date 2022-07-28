@@ -118,5 +118,26 @@ if (submit()) {
             </form>
         </div>
     </div>
+
+    <div class="max-w-5xl mx-auto mt-8">
+        <div class="flex flex-wrap">
+            <?php foreach (Character::all() as $character) { ?>
+                <div class="w-1/2 lg:w-1/3">
+                    <div class="border p-8 rounded-lg mb-8 text-center mx-4">
+                        <h1 class="text-2xl">Salut <?= $character->name; ?></h1>
+                        <p>Tu es un <?= $character->getClass().' '.$character->getTribe(); ?>.</p>
+
+                        <img class="my-4 mx-auto rounded-full" src="<?= $character->image(); ?>" alt="<?= $character->name; ?>">
+
+                        <ul class="divide-y border mb-4 mx-auto rounded">
+                            <li class="py-2">Ta santé: <?= $character->health; ?></li>
+                            <li class="py-2">Ta force: <?= $character->strength; ?></li>
+                            <li class="py-2">Ton mana: <?= $character->mana; ?></li>
+                        </ul>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
 </body>
 </html>

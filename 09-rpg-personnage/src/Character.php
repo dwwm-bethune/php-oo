@@ -132,4 +132,14 @@ class Character
 
         $query->execute([$this->name, $this->tribe, $this->class, $this->health]);
     }
+
+    /**
+     * Récupèrer la liste des personnages.
+     */
+    public static function all()
+    {
+        $query = self::db()->query('SELECT * FROM characters');
+
+        return $query->fetchAll(\PDO::FETCH_CLASS, self::class);
+    }
 }
