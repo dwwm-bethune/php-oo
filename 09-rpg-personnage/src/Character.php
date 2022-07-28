@@ -20,6 +20,7 @@ class Character
         'dwarf' => 'Nain',
         'elf' => 'Elfe',
     ];
+    private static $db;
 
     public function __construct($name = null, $class = null, $tribe = null)
     {
@@ -108,5 +109,27 @@ class Character
     public function hasErrors()
     {
         return ! empty($this->errors());
+    }
+
+    /**
+     * Permet de se connecter à la base de données.
+     */
+    public static function db()
+    {
+        if (!self::$db) {
+            self::$db = new \PDO('mysql:host=localhost;dbname=exercice-sql-1;charset=utf8', 'root', '');
+        }
+
+        return self::$db;
+    }
+
+    /**
+     * Ajoute le personnage dans la BDD.
+     */
+    public function save()
+    {
+        $query = self::db()->prepare('INSERT INTO characters (name, tribe, class, health) VALUES (?, ?, ?, ?)');
+
+        $query->execute([$this->name, $this->tribe, $this->class, $this->health]);
     }
 }

@@ -13,6 +13,11 @@ if (submit()) {
     if (post('random')) {
         $character->randomName();
     }
+
+    if (! $character->hasErrors()) {
+        // On ajoute le personnage dans la BDD
+        $character->save();
+    }
 }
 ?>
 <!DOCTYPE html>
