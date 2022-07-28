@@ -45,6 +45,25 @@ class Character
         }
     }
 
+    public function getClass()
+    {
+        return self::CLASSES[$this->class];
+    }
+
+    public function getTribe()
+    {
+        return self::TRIBES[$this->tribe];
+    }
+
+    /**
+     * Permet de récupèrer l'image correspondante à la classe du personnage.
+     */
+    public function image()
+    {
+        // img/guerrier.jpg
+        return 'img/'.strtolower($this->class).'.jpg';
+    }
+
     /**
      * Permet de générer un nom aléatoire au personnage.
      */
