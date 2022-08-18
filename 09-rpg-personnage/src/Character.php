@@ -112,6 +112,22 @@ class Character
     }
 
     /**
+     * Permet de simuler un combat.
+     */
+    public function fight(self $target)
+    {
+        if ($this->class == 'magus') {
+            $target->health -= $this->mana * 2;
+        } else {
+            $target->health -= $this->strength;
+        }
+
+        if ($target->health <= 0) {
+            $target->health = 0;
+        }
+    }
+
+    /**
      * Permet de se connecter à la base de données.
      */
     public static function db()
