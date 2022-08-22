@@ -62,7 +62,7 @@ class Character
     public function image()
     {
         // img/guerrier.jpg
-        return 'img/'.strtolower($this->class).'.jpg';
+        return 'img/'.$this->class.'.jpg';
     }
 
     /**
@@ -125,6 +125,8 @@ class Character
         if ($target->health <= 0) {
             $target->health = 0;
         }
+
+        // Update health en BDD...
     }
 
     /**

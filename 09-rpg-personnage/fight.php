@@ -1,11 +1,10 @@
 <?php
 
-session_start();
-
 require 'src/helpers.php';
 autoload();
 
 use Game\Character;
+use Game\Fight;
 
 $attacker = Character::find($_GET['attacker'] ?? 0);
 $target = Character::find($_GET['target'] ?? 0);
@@ -16,25 +15,8 @@ if (!$attacker || !$target) {
 }
 
 // Simuler le combat (On pourrait créer une classe Fight à part pour gérer toute cette logique...)
-$attackerHealth = $attacker->health;
-$targetHealth = $target->health;
-
-$first = rand(0, 3) !== 0 ? [$attacker, $target] : [$target, $attacker];
-$first[0]->fight($first[1]);
-
-$second = rand(0, 1) ? [$attacker, $target] : [$target, $attacker];
-$second[0]->fight($second[1]);
-
-$winner = null;
-if ($attacker->health === 0) {
-    $winner = $target;
-} else if ($target->health === 0) {
-    $winner = $attacker;
-} else if ($attackerHealth - $attacker->health < $targetHealth - $target->health) {
-    $winner = $attacker;
-} else {
-    $winner = $target;
-}
+$fight = new Fight($attacker, $target);
+$winner = $fight->winner();
 
 ?>
 <!DOCTYPE html>
@@ -57,7 +39,7 @@ if ($attacker->health === 0) {
                     <img class="my-4 mx-auto rounded-full" src="<?= $attacker->image(); ?>" alt="<?= $attacker->name; ?>">
 
                     <ul class="divide-y border mb-4 mx-auto rounded">
-                        <li class="py-2">Ta santé (avant le combat): <?= $attackerHealth; ?></li>
+                        <li class="py-2">Ta santé (avant le combat): <?= $fight->attackerHealth; ?></li>
                         <li class="py-2">Ta santé: <?= $attacker->health; ?></li>
                         <li class="py-2">Ta force: <?= $attacker->strength; ?></li>
                         <li class="py-2">Ton mana: <?= $attacker->mana; ?></li>
@@ -78,7 +60,7 @@ if ($attacker->health === 0) {
                     <img class="my-4 mx-auto rounded-full" src="<?= $target->image(); ?>" alt="<?= $target->name; ?>">
 
                     <ul class="divide-y border mb-4 mx-auto rounded">
-                        <li class="py-2">Ta santé (avant le combat): <?= $targetHealth; ?></li>
+                        <li class="py-2">Ta santé (avant le combat): <?= $fight->targetHealth; ?></li>
                         <li class="py-2">Ta santé: <?= $target->health; ?></li>
                         <li class="py-2">Ta force: <?= $target->strength; ?></li>
                         <li class="py-2">Ton mana: <?= $target->mana; ?></li>
