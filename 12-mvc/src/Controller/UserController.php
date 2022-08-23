@@ -9,16 +9,24 @@ class UserController
 {
     public function list()
     {
-        $user = new User();
-        $user->name = 'Fiorella';
-        $user->email = 'fiorella@boxydev.com';
-        // $user->save();
-
         $users = User::all();
 
         return View::render('user/list', [
             'users' => $users,
             'name' => 'Fiorella',
         ]);
+    }
+
+    public function create()
+    {
+        $user = new User();
+        $user->name = 'Fiorella';
+        $user->email = 'fiorella@boxydev.com';
+        $user->save();
+    }
+
+    public function show($id)
+    {
+        dump($id);
     }
 }
