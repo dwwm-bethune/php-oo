@@ -26,7 +26,7 @@ class DB
         $query = self::db()->prepare($sql);
         $query->execute($bindings);
 
-        return $query->fetchAll();
+        return $query->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public static function insert($sql, $bindings = [])

@@ -3,6 +3,7 @@
 namespace M2i\Mvc\Controller;
 
 use M2i\Mvc\Model\User;
+use M2i\Mvc\View;
 
 class UserController
 {
@@ -11,10 +12,13 @@ class UserController
         $user = new User();
         $user->name = 'Fiorella';
         $user->email = 'fiorella@boxydev.com';
-        $user->save();
+        // $user->save();
 
-        dump(User::all());
+        $users = User::all();
 
-        return 'vue';
+        return View::render('user/list', [
+            'users' => $users,
+            'name' => 'Fiorella',
+        ]);
     }
 }
