@@ -16,7 +16,7 @@ $app->addRoutes([
     // comme la liste utilisateur.
     ['GET', '/', 'HomeController@index'],
     ['GET', '/user', 'UserController@list'],
-    ['GET', '/user/create', 'UserController@create'],
+    ['GET|POST', '/user/create', 'UserController@create'],
     ['GET', '/user/[:id]', 'UserController@show'],
 ]);
 

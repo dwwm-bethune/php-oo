@@ -10,12 +10,18 @@ class Model
 
     public function __set($attribute, $value)
     {
+        $this->$attribute = $value;
         $this->attributes[$attribute] = $value;
     }
 
     public function __get($attribute)
     {
         return $this->$attribute;
+    }
+
+    public function __isset($attribute)
+    {
+        return $this->__get($attribute);
     }
 
     public function save()

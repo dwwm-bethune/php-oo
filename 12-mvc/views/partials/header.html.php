@@ -14,6 +14,7 @@
                 <li>
                     <a class="px-4" href="<?= BASE_URL; ?>/">Accueil</a>
                     <a class="px-4" href="<?= BASE_URL; ?>/user">Liste des utilisateurs</a>
+                    <a class="px-4" href="<?= BASE_URL; ?>/user/create">Créer un utilisateur</a>
                 </li>
             </ul>
         </div>

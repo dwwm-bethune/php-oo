@@ -20,9 +20,29 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        $user->name = 'Fiorella';
-        $user->email = 'fiorella@boxydev.com';
-        $user->save();
+        $user->name = $_POST['name'] ?? null;
+        $user->email = $_POST['email'] ?? null;
+        $errors = [];
+        $success = false;
+
+        if (!empty($_POST)) {
+            if (empty($user->name)) {
+                $errors['name'] = 'Le nom est invalide.';
+            }
+
+            if (empty($user->email)) {
+                $errors['email'] = 'L\'email est invalide.';
+            }
+
+            if (empty($errors)) {
+                $success = $user->save();
+            }
+        }
+
+        return View::render('user/create', [
+            'errors' => $errors,
+            'success' => $success,
+        ]);
     }
 
     public function show($id)
