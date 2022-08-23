@@ -46,6 +46,15 @@ class Model
         return DB::select($sql, [], static::class);
     }
 
+    public static function find($id)
+    {
+        $table = self::getTable();
+
+        $sql = "SELECT * FROM $table WHERE id = :id";
+
+        return DB::selectOne($sql, ['id' => $id], static::class);
+    }
+
     /**
      * Permet de récupérer le nom de la table.
      */

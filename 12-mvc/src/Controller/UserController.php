@@ -27,6 +27,20 @@ class UserController
 
     public function show($id)
     {
-        dump($id);
+        // @todo Ajouter une méthode statique find dans le modèle
+        // Cela doit être une instance du modèle
+        $user = User::find($id);
+
+        if (! $user) {
+            echo '404';
+            die();
+        }
+
+        // @todo renvoyer une vue pour afficher les détails de l'utilisateur
+        // On pourrait accèder à la page en cliquant sur un utilisateur dans
+        // la liste
+        return View::render('user/show', [
+            'user' => $user,
+        ]);
     }
 }

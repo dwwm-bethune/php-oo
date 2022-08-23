@@ -2,7 +2,11 @@
 
     <div class="max-w-5xl mx-auto">
         <?php foreach ($users as $user) : ?>
-            <h2><?= $user->name; ?></h2>
+            <h2>
+                <a href="<?= BASE_URL; ?>/user/<?= $user->id; ?>">
+                    <?= $user->name; ?>
+                </a>
+            </h2>
         <?php endforeach; ?>
     </div>
 
