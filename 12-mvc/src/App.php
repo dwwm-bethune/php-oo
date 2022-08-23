@@ -16,7 +16,7 @@ class App extends \AltoRouter
             // fn(...[1, 2, 3]) devient fn(1, 2, 3)
             $call->$method(...$match['params']); // $call->list();
         } else {
-            echo '404';
+            View::notFound();
         }
     }
 }

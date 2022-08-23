@@ -4,7 +4,7 @@ namespace M2i\Mvc\Controller;
 
 use M2i\Mvc\View;
 
-class HomeController
+class HomeController extends Controller
 {
 	public function index()
 	{

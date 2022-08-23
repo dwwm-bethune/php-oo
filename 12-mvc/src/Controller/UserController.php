@@ -5,7 +5,7 @@ namespace M2i\Mvc\Controller;
 use M2i\Mvc\Model\User;
 use M2i\Mvc\View;
 
-class UserController
+class UserController extends Controller
 {
     public function list()
     {
@@ -32,8 +32,7 @@ class UserController
         $user = User::find($id);
 
         if (! $user) {
-            echo '404';
-            die();
+            return $this->notFound();
         }
 
         // @todo renvoyer une vue pour afficher les détails de l'utilisateur

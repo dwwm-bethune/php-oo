@@ -20,4 +20,11 @@ class View
 
         include $view;
     }
+
+    public static function notFound()
+    {
+        http_response_code(404);
+
+        return self::render('404');
+    }
 }
