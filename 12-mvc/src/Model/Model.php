@@ -13,6 +13,11 @@ class Model
         $this->attributes[$attribute] = $value;
     }
 
+    public function __get($attribute)
+    {
+        return $this->$attribute;
+    }
+
     public function save()
     {
         $table = self::getTable();
@@ -33,7 +38,12 @@ class Model
 
         $sql = "SELECT * FROM $table";
 
-        return DB::select($sql);
+        // static::class => User
+        // self::class => Model
+        // On passe la classe du modèle pour
+        // récupérer une liste d'objets
+
+        return DB::select($sql, [], static::class);
     }
 
     /**

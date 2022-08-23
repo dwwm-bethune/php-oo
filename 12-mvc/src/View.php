@@ -14,9 +14,9 @@ class View
 
         $view = __DIR__.'/../views/'.$template.'.html.php';
 
-        // if (!file_exists($view)) {
-        //     throw new Exception("Le template $template n'existe pas.");
-        // }
+        if (!file_exists($view)) {
+            throw new \Exception("Le template $template n'existe pas.");
+        }
 
         include $view;
     }

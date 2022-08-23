@@ -21,12 +21,12 @@ class DB
         return self::$db;
     }
 
-    public static function select($sql, $bindings = [])
+    public static function select($sql, $bindings = [], $class = null)
     {
         $query = self::db()->prepare($sql);
         $query->execute($bindings);
 
-        return $query->fetchAll(\PDO::FETCH_OBJ);
+        return $query->fetchAll(\PDO::FETCH_CLASS, $class);
     }
 
     public static function insert($sql, $bindings = [])
