@@ -4,7 +4,7 @@ namespace M2i\Mvc;
 
 class View
 {
-    public static function render($template, $data = null)
+    public static function render($template, $data = [])
     {
         // Ici, on passe les données du contrôleur au template
         // On peut échapper les valeurs à ce moment là

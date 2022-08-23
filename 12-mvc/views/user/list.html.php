@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>MVC</title>
-</head>
-<body>
-    <?php foreach ($users as $user) : ?>
-        <h2><?= $user->name; ?></h2>
-    <?php endforeach; ?>
-</body>
-</html>
+<?php require __DIR__.'/../partials/header.html.php'; ?>
+
+    <div class="max-w-5xl mx-auto">
+        <?php foreach ($users as $user) : ?>
+            <h2><?= $user->name; ?></h2>
+        <?php endforeach; ?>
+    </div>
+
+<?php require __DIR__.'/../partials/footer.html.php'; ?>
